@@ -1,15 +1,9 @@
-.card  {
-    min-width: 39%;
-    margin-left: 4%;
-    place-items: flex;
-    margin-bottom: 50px;
-}
-.card1 {
-    margin-left:9%;
+.container{
+    margin: 50px 0;
 }
 
-.lineCard{
-    min-width: 82%;
+.card  {
+    margin: 0 2% !important;
 }
 
 .infected{
