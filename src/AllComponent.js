@@ -269,6 +269,7 @@ class MainPage extends React.Component {
             this.setState({ updateTime: summarydata.Date });
 
         } else {
+            
             const summarydata = await fetchCountrySummary(name);
             
             this.setState({ dailyData: summarydata })
