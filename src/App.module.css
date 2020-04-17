@@ -1,26 +1,12 @@
 .card  {
     min-width: 39%;
-    margin-left: 4%;
-    place-items: flex;
-    margin-bottom: 50px;
+    margin: 0 2.5% !important;
 }
-.card1 {
-    margin-left:9%;
-}
+
+
+
 
 .lineCard{
-    min-width: 82%;
-}
-
-.infected{
-    border-bottom: 10px solid orange;
-}
-
-.recovered{
-    border-bottom: 10px solid rgb(34, 181, 226);
-}
-
-
-.deaths{
-    border-bottom: 10px solid red;
+    min-width: 83%;
+    margin-top: 50px !important;
 }

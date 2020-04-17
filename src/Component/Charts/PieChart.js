@@ -44,7 +44,8 @@ const PieChart = ({data}) => {
                     type: ['pie', 'funnel']
                 },
                 restore: { show: true },
-                saveAsImage: { show: true }
+                saveAsImage: { show: true },
+                
             }
         },
         series: [
@@ -67,7 +68,7 @@ const PieChart = ({data}) => {
                     { value: data.TotalConfirmed, name: 'Confirmed        ' },
                     { value: data.NewConfirmed, name: 'New Confirmed ' },
                     { value: data.TotalRecovered, name: 'Recovered' },
-                    { value: data.NewCovered, name: 'New Recovered' },
+                    { value: data.NewRecovered, name: 'New Recovered' },
                     { value: data.TotalDeaths, name: 'deaths               ' },
                     { value: data.NewDeaths, name: 'new deaths' },
                 ]

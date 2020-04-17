@@ -9,24 +9,51 @@ const url = 'https://covid19.mathdro.id/api';
 
 export const fetchSummaryData=async ()=>{
     try {
-        const {data:{Global,Date}} = await axios.get(urlSummary);
+        const {data:{Global,Date,Countries}} = await axios.get(urlSummary);
+        console.log(Countries);
+        return {Global,Date,Countries};
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export const fetchDailyData=async (name)=>{
+    try {
+        const {data} = await axios.get(urlDailyTotal);
         
+        const modifiedData=data[name];
+
+        return modifiedData;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const fetchGlobalSummary=async()=>{
+    try {
+        const {data:{Global,Date}} = await axios.get(urlSummary);
         return {Global,Date};
     } catch (error) {
         console.log(error);
     }
 }
 
-
-export const fetchDailyData=async ()=>{
+export const fetchCountrySummary=async(name)=>{
     try {
-        const {data} = await axios.get(urlDailyTotal);
-        
-        return data;
+        const {data:{Countries}} = await axios.get(urlSummary);
+        const modifiedData=Countries.find((item)=>{
+            return item.Country===name;
+        });
+
+        return modifiedData;
     } catch (error) {
         console.log(error);
     }
 }
+
+
+
 
 export const fetchDaily=async()=>{
     try {
@@ -45,17 +72,6 @@ export const fetchDaily=async()=>{
     }
 }
 
-export const countrydata=async()=>{
-    try {
-        const {data:{countries}}=await axios.get(`${url}/countries`);
-
-        return countries.map((country)=>country.name);
-
-
-    } catch (error) {
-        
-    }
-}
 
 
 

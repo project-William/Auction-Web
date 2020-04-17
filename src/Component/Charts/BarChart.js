@@ -9,9 +9,9 @@ const style = {
     width: "100%",
 };
 
-const BarChart = ({ data: { Global, Date } }) => {
+const BarChart = ({ data }) => {
 
-    if (!Global) {
+    if (!data) {
         return "Loading...";
     }
 
@@ -54,9 +54,9 @@ const BarChart = ({ data: { Global, Date } }) => {
                 name: 'Total',
                 type: 'bar',
                 data: [
-                    Global.TotalConfirmed/10000, 
-                    Global.TotalRecovered/10000, 
-                    Global.TotalDeaths/10000
+                    data.TotalConfirmed/10000, 
+                    data.TotalRecovered/10000, 
+                    data.TotalDeaths/10000
                 ]
                 
             },
@@ -64,9 +64,9 @@ const BarChart = ({ data: { Global, Date } }) => {
                 name: 'New',
                 type: 'bar',
                 data: [
-                    Global.NewConfirmed/10000,
-                    Global.NewConfirmed/10000,
-                    Global.NewConfirmed/10000
+                    data.NewConfirmed/10000,
+                    data.NewConfirmed/10000,
+                    data.NewConfirmed/10000
                 ]
             }
         ]

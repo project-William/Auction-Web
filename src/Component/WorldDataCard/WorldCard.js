@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Grid, CardContent, Typography } from '@material-ui/core'
 import style from './WorldCard.module.css'
 import CountUp from 'react-countup'
 import cx from 'classnames'
 
-const WorldCard = ({ data: { Global, Date } }) => {
+const WorldCard = ({ data,date }) => {
 
 
-    if (!Global) {
+    if (!data) {
         return "Loading...";
     }
 
-    const date=Date;
+    console.log(data.TotalConfirmed);
 
-
+    const Co=data.TotalConfirmed;
+    console.log(Co)
     return (
         <div className={style.container}>
             <Grid container spacing={1} justify='center'>
@@ -22,25 +23,15 @@ const WorldCard = ({ data: { Global, Date } }) => {
                     className={cx(style.card, style.infected)}
                 >
                     <CardContent>
-                        <Typography variant='body2'>
-                            Infected:
-                                <CountUp
-                                start={0}
-                                end={Global.TotalConfirmed}
-                                duration={2.5}
-                                separator=','
-                            />
+                        <Typography variant='body1'>
+                            Confirmed : {data.TotalConfirmed}
+                    
                         </Typography>
-                        <Typography color='error' variant='body2' >
-                            New:
-                                <CountUp
-                                start={0}
-                                end={Global.NewConfirmed}
-                                duration={2.5}
-                                separator=','
-                            />
+                        <Typography color='error' variant='body1' >
+                            New : {data.NewConfirmed}
+                          
                         </Typography>
-                        <Typography variant="body2" color='textSecondary'>
+                        <Typography variant="body1" color='textSecondary'>
                         Last update time : {new window.Date(date).toDateString()}
                         </Typography>
                     </CardContent>
@@ -51,25 +42,13 @@ const WorldCard = ({ data: { Global, Date } }) => {
                     className={cx(style.card, style.recovered)}
                 >
                     <CardContent>
-                        <Typography variant='body2'>
-                            Recovered:
-                                <CountUp
-                                start={0}
-                                end={Global.TotalRecovered}
-                                duration={2.5}
-                                separator=','
-                            />
+                        <Typography variant='body1'>
+                            Recovered : {data.TotalRecovered}
                         </Typography>
-                        <Typography color='error' variant='body2'>
-                            New:
-                                <CountUp
-                                start={0}
-                                end={Global.NewRecovered}
-                                duration={2.5}
-                                separator=','
-                            />
+                        <Typography color='error' variant='body1'>
+                            New : {data.NewRecovered}
                         </Typography>
-                        <Typography variant="body2" color='textSecondary'>
+                        <Typography variant="body1" color='textSecondary'>
                         Last update time : {new window.Date(date).toDateString()}
                         </Typography>
                     </CardContent>
@@ -80,25 +59,15 @@ const WorldCard = ({ data: { Global, Date } }) => {
                     className={cx(style.card, style.deaths)}
                 >
                     <CardContent>
-                        <Typography variant='body2'>
-                            Deaths:
-                                <CountUp
-                                start={0}
-                                end={Global.TotalDeaths}
-                                duration={2.5}
-                                separator=','
-                            />
+                        <Typography variant='body1'>
+                            Deaths : {data.TotalDeaths}
+                        
                         </Typography>
-                        <Typography color='error' variant='body2'>
-                            New:
-                                <CountUp
-                                start={0}
-                                end={Global.NewDeaths}
-                                duration={2.5}
-                                separator=','
-                            />
+                        <Typography color='error' variant='body1'>
+                            New : {data.NewDeaths}
+                      
                         </Typography>
-                        <Typography variant="body2" color='textSecondary'>
+                        <Typography variant="body1" color='textSecondary'>
                             Last update time : {new window.Date(date).toDateString()}
                         </Typography>
                     </CardContent>

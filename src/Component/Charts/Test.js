@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {fetchDaily} from '../../API/Json'
 import {Line ,Bar} from 'react-chartjs-2'
 
-const Chart=()=>{
+function Chart({daily}){
     const [dailyData,setDailyData]=useState([]);
 
     useEffect(()=>{
@@ -12,7 +12,7 @@ const Chart=()=>{
 
         fetchAPI();
     })
-
+    
     const lineChart=(
         dailyData.length?
         <Line
