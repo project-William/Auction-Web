@@ -11,10 +11,8 @@ const WorldCard = ({ data,date }) => {
         return "Loading...";
     }
 
-    console.log(data.TotalConfirmed);
+  
 
-    const Co=data.TotalConfirmed;
-    console.log(Co)
     return (
         <div className={style.container}>
             <Grid container spacing={1} justify='center'>

@@ -38,14 +38,14 @@ const countriesNames = [
     "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
     "Barbados", "Belarus", "Belgium", "Benin", "Bhutan",
     "Bolivia", "Bosnia and Herzegovina", "Brazil",
-    "Bulgaria", "Burkina Faso", "cabo verde", "Cambodia",
-    "Cameroon", "Canada", "Central African Republic", "Chad",
+    "Bulgaria", "Burkina Faso", "Cabo Verde", "Cambodia",
+    "Canada", "Central African Republic", "Chad",
     "Chile", "China", "Colombia", "Congo (Brazzaville)",
     "Congo (Kinshasa)", "Costa Rica", "Croatia",
     "Cuba", "Cyprus", "Czechia", "Denmark",
     "Djibouti", "Dominican Republic", "Ecuador", "Egypt",
     "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia",
-    "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
+    "Ethiopia", "Fiji", "Finland", "France", "Gabon",
     "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Guatemala",
     "Guinea", "Guyana", "Haiti", "Holy See", "Honduras", "Hungary",
     "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland",
@@ -55,7 +55,7 @@ const countriesNames = [
     "Madagascar", "Malaysia", "Maldives", "Malta", "Mauritania",
     "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro",
     "Morocco", "Namibia", "Nepal", "Netherlands", "New Zealand",
-    "Nicaragua", "Niger", "Nigeria", "North Macedonia",
+    "Nicaragua", "Niger", "Nigeria",
     "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea",
     "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
     "Qatar", "Romania", "Russia", "Rwanda", "Saint Lucia",
@@ -67,9 +67,9 @@ const countriesNames = [
     "Tunisia", "Turkey", "Uganda", "Ukraine", "United Arab Emirates",
     "United Kingdom", "Uruguay", "US", "Uzbekistan", "Venezuela",
     "Vietnam", "Zambia", "Zimbabwe", "Dominica", "Grenada", "Mozambique",
-    "Syria", "Timor-Leste", "Belize", "Laos", "Libya", "West Bank and Gaza",
-    "Guinea-Bissau", "Mali", "Saint Kitts and Nevis", "Kosovo", "Burma",
-    "MS Zaandam", "Botswana", "Burundi", "Sierra Leone", "Malawi",
+    "Syria", "Timor-Leste", "Belize", "Laos", "Libya", 
+    "Guinea-Bissau", "Mali", "Saint Kitts and Nevis", 
+    "Botswana", "Burundi", "Sierra Leone", "Malawi",
     "South Sudan", "Western Sahara", "Sao Tome and Principe", "Yemen"
 ];
 
@@ -168,8 +168,8 @@ function AllComponent({ handleClick,data,date,countryName }) {
                 <Hidden smUp implementation="css">
                     <Drawer
                         //container={container}
-                        //variant="temporary"
-                        // anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                        variant="temporary"
+                        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
                         open={mobileOpen}
                         onClose={handleDrawerToggle}
                         classes={{
@@ -260,7 +260,6 @@ class MainPage extends React.Component {
         } else {
             
             const summarydata = await fetchCountrySummary(name);
-            
             this.setState({ dailyData: summarydata })
         }
     }
