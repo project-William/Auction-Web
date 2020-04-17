@@ -227,17 +227,6 @@ function Charts({ data,date }) {
 
                 </Grid>
             </Grid>
-
-            <Grid container spacing={1} justify='center'>
-                <Grid item xs={12} md={2}
-                    component={Card}
-                    className={cx(style.card,style.lineCard)}
-                >
-                    <LineChart data={data} />
-
-                </Grid>
-
-            </Grid>
         </main>
     )
 }
