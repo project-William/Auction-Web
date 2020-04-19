@@ -5,6 +5,7 @@ const urlSummary = "https://api.covid19api.com/summary"
 const urlDailyTotal = 'https://pomber.github.io/covid19/timeseries.json';
 
 
+const urlSummaryDaily = 'https://covid19.mathdro.id/api/daily';
 const url = 'https://covid19.mathdro.id/api';
 
 export const fetchSummaryData = async () => {
@@ -29,6 +30,28 @@ export const fetchDailyData = async (name) => {
         console.log(error);
     }
 }
+
+
+
+
+export const fetchSumaryDaily = async () => {
+    try {
+        const { data } = await axios.get(urlSummaryDaily);
+
+        const modifiedData = data.map((dailyData) => ({
+            date: dailyData.reportDate,
+            confirmed: dailyData.confirmed.total,
+            deaths: dailyData.deaths.total,
+            recovered:dailyData.recovered.total
+        }))
+
+        return modifiedData;
+
+    } catch (error) {
+
+    }
+}
+
 
 export const fetchGlobalSummary = async () => {
     try {
@@ -90,6 +113,9 @@ export const fetchCountrySummary = async (name) => {
         console.log(error);
     }
 }
+
+
+
 
 
 

@@ -15,17 +15,17 @@ import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, duration } from '@material-ui/core/styles';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import {
     WorldCard, BarChart,
-    PieChart, LineChart, Chart
+    PieChart, LineChart, WorldMap
 } from './Component/Components'
 
 import cx from 'classnames'
 import { Grid, Card } from '@material-ui/core'
 import style from './App.module.css'
-import {  fetchCountrySummary, fetchGlobalSummary } from './API/Json'
+import { fetchCountrySummary, fetchGlobalSummary, fetchDailyData, fetchSumaryDaily } from './API/Json'
 
 import echartsTheme from './API/EChartTheme'
 import echarts from 'echarts';
@@ -67,8 +67,8 @@ const countriesNames = [
     "Tunisia", "Turkey", "Uganda", "Ukraine", "United Arab Emirates",
     "United Kingdom", "Uruguay", "US", "Uzbekistan", "Venezuela",
     "Vietnam", "Zambia", "Zimbabwe", "Dominica", "Grenada", "Mozambique",
-    "Syria", "Timor-Leste", "Belize", "Laos", "Libya", 
-    "Guinea-Bissau", "Mali", "Saint Kitts and Nevis", 
+    "Syria", "Timor-Leste", "Belize", "Laos", "Libya",
+    "Guinea-Bissau", "Mali", "Saint Kitts and Nevis",
     "Botswana", "Burundi", "Sierra Leone", "Malawi",
     "South Sudan", "Western Sahara", "Sao Tome and Principe", "Yemen"
 ];
@@ -114,8 +114,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function AllComponent({ handleClick,data,date,countryName }) {
-
+function AllComponent({ handleClick, data, date, countryName, daily }) {
 
     const classes = useStyles();
     const theme = useTheme();
@@ -125,7 +124,6 @@ function AllComponent({ handleClick,data,date,countryName }) {
         setMobileOpen(!mobileOpen);
     };
 
-    console.log(countryName)
 
     const drawer = (
         <div>
@@ -133,8 +131,8 @@ function AllComponent({ handleClick,data,date,countryName }) {
             <Divider />
             <List>
                 {countriesNames.map((text, index) => (
-                    <ListItem button key={text} selected={text===countryName} onClick={() => handleClick(text)}>
-                        <ListItemIcon><Brightness1Icon /></ListItemIcon>
+                    <ListItem button key={text} selected={text === countryName} onClick={() => handleClick(text)}>
+                        <ListItemIcon color='red'><Brightness1Icon /></ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -194,21 +192,26 @@ function AllComponent({ handleClick,data,date,countryName }) {
                     </Drawer>
                 </Hidden>
             </nav>
-            <Charts data={data} date={date}></Charts>
+            <Charts data={data} date={date} daily={daily}></Charts>
         </div >
     )
 }
 
 
-function Charts({ data,date }) {
+function Charts({ data, date, daily }) {
+
 
     const classes = useStyles();
 
     return (
         <main className={classes.content}>
             <div className={classes.toolbar} />
-            
-            <WorldCard data={data} date={date}/>
+
+            <WorldCard data={data} date={date} />
+
+
+           
+
 
             <Grid container spacing={1} justify='center'>
                 <Grid item xs={12} md={2}
@@ -223,10 +226,30 @@ function Charts({ data,date }) {
                     className={cx(style.card)}
                 >
                     <PieChart data={data} />
+                </Grid>
+            </Grid>
 
+            <Grid container spacing={1} justify='center'>
+                <Grid item xs={12} md={2}
+                    component={Card}
+                    className={cx(style.card,style.lineCard)}
+                >
+                    <LineChart data={daily} />
 
                 </Grid>
             </Grid>
+    
+            <Grid container spacing={1} justify='center'>
+                <Grid item xs={12} md={2}
+                    component={Card}
+                    className={cx(style.card,style.map)}
+                >
+                <WorldMap />
+                    
+
+                </Grid>
+            </Grid>
+
         </main>
     )
 }
@@ -236,31 +259,43 @@ class MainPage extends React.Component {
     state = {
         dailyData: {},
         updateTime: {},
-        dailySeries:[],
-        countryName:{}
+        dailySeries: [],
+        countryName: {}
     }
 
     async componentDidMount() {
         const data = await fetchGlobalSummary();
         this.setState({ dailyData: data.Global });
+
+        const summaryDaily=await fetchSumaryDaily();
+        this.setState({dailySeries:summaryDaily});
+    
     }
 
-    componentWillMount(){
+    componentWillMount() {
         echarts.registerTheme('theme', echartsTheme);
     }
 
     handleClick = async (name) => {
-        this.state.countryName=name;
+        this.state.countryName = name;
         if (name === "Global") {
             const summarydata = await fetchGlobalSummary();
 
             this.setState({ dailyData: summarydata.Global });
             this.setState({ updateTime: summarydata.Date });
 
+            const summaryDaily=await fetchSumaryDaily();
+            this.setState({dailySeries:summaryDaily});
+
         } else {
-            
+
+            const dailySeries = await fetchDailyData(name);
+            this.setState({ dailySeries: dailySeries });
+            console.log(dailySeries);
+
             const summarydata = await fetchCountrySummary(name);
-            this.setState({ dailyData: summarydata })
+            this.setState({ dailyData: summarydata });
+
         }
     }
 
@@ -271,9 +306,10 @@ class MainPage extends React.Component {
                     data={this.state.dailyData}
                     date={this.state.updateTime}
                     countryName={this.state.countryName}
+                    daily={this.state.dailySeries}
                 ></AllComponent>
-               
-               
+
+
             </div>
         )
     }
