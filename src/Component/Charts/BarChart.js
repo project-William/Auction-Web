@@ -18,7 +18,7 @@ const BarChart = ({ data }) => {
     let option = {
         
         title: {
-            text: 'Bar Chart',
+            text: 'Bar Chart(10K)',
             subtext: '',
             left:'center',
             top:'5%'
@@ -65,8 +65,8 @@ const BarChart = ({ data }) => {
                 type: 'bar',
                 data: [
                     data.NewConfirmed/10000,
-                    data.NewConfirmed/10000,
-                    data.NewConfirmed/10000
+                    data.NewRecovered/10000,
+                    data.NewDeaths/10000
                 ]
             }
         ]
