@@ -1,7 +1,5 @@
 ## Covid-19 Data Visualization
 
-----
-
 ### Introduction
 
 This is a web app built by react which can show the covid19 case numbers.
