@@ -25,9 +25,9 @@ import {
 import cx from 'classnames'
 import { Grid, Card } from '@material-ui/core'
 import style from './App.module.css'
-import { fetchCountrySummary, fetchGlobalSummary, fetchDailyData, fetchSumaryDaily } from './API/Json'
+import { fetchCountrySummary, fetchGlobalSummary, fetchDailyData, fetchSumaryDaily } from './Api/Json'
 
-import echartsTheme from './API/EChartTheme'
+import echartsTheme from './Api/EChartTheme'
 import echarts from 'echarts';
 
 
