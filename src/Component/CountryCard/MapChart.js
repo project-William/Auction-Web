@@ -35,7 +35,7 @@ const MapChart = ({ setTooltipContent }) => {
                   stroke="#EAEAEC"
                   onMouseEnter={() => {
                     const { NAME, POP_EST } = geo.properties;
-                    setTooltipContent(`${NAME} — 1000`);
+                    setTooltipContent(`${NAME} — 123`);
                   }}
                   onMouseLeave={() => {
                     setTooltipContent("");

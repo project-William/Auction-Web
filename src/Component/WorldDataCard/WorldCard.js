@@ -11,7 +11,6 @@ const WorldCard = ({ data,date }) => {
         return "Loading...";
     }
 
-  
 
     return (
         <div className={style.container}>
