@@ -256,6 +256,7 @@ class MainPage extends React.Component {
     async componentDidMount() {
         const data = await fetchGlobalSummary();
         this.setState({ dailyData: data.Global });
+        this.setState({updateTime:data.Date})
 
         const summaryDaily=await fetchSumaryDaily();
         this.setState({dailySeries:summaryDaily});
@@ -281,6 +282,7 @@ class MainPage extends React.Component {
 
             const dailySeries = await fetchDailyData(name);
             this.setState({ dailySeries: dailySeries });
+            
             console.log(dailySeries);
 
             const summarydata = await fetchCountrySummary(name);
